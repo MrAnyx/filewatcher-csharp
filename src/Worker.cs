@@ -1,8 +1,6 @@
 using NLog;
 
-namespace FileWatcherService;
-
-public class Worker : BackgroundService
+class Worker : BackgroundService
 {
     private readonly ILogger<Worker> _logger;
 

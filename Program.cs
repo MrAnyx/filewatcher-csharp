@@ -1,9 +1,8 @@
-using FileWatcherService;
-using LogLayout;
-using NLog.Config;
+using NLog;
+using NLog.LayoutRenderers;
 using NLog.Web;
 
-internal class Program
+class Program
 {
     private static void Main(string[] args)
     {
@@ -13,7 +12,9 @@ internal class Program
 
     private static void ConfigureNLogLayoutRenderer()
     {
-        ConfigurationItemFactory.Default.LayoutRenderers.RegisterDefinition("sessionuuid", typeof(SessionUuidLayoutRenderer));
+        LogManager.Setup().SetupExtensions(
+            extensionsBuilder => extensionsBuilder.RegisterLayoutRenderer<SessionUuidLayoutRenderer>("sessionuuid")
+        );
     }
 
     public static IHostBuilder CreateHostBuilder(string[] args)
